@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Cognitive Trace — local analysis</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="wordmark"><h1>Cognitive Trace</h1><span>session stored in this tab only</span></div>
+      <button id="delete" class="text-action danger" disabled>Delete analysis</button>
+    </div>
+  </header>
+  <main>
+    <section id="welcome" class="welcome">
+      <div class="welcome-copy">
+        <h2>A record of the questions you asked, with the evidence left intact.</h2>
+        <p>This is a local index of explicit wording patterns in your own export. It cannot measure intelligence, diagnose anything, or know more than the text shows.</p>
+        <div class="welcome-actions">
+          <label class="upload"><input id="zip" type="file" accept=".zip,application/zip">Choose an export ZIP</label>
+          <button id="demo" class="text-action">Open a synthetic example</button>
+        </div>
+        <p id="status" role="status"></p>
+      </div>
+      <aside class="local-note">
+        <h3>What stays here</h3>
+        <p>Archive, message text, labels, and evidence remain in browser memory. No account. No analytics. No model call.</p>
+        <svg viewBox="0 0 160 82" aria-hidden="true"><path d="M2 66c19-38 34-34 48-10s26 23 38-8 27-35 70-12M2 47c23-33 39-25 52-4s25 17 36-7 31-27 68-8M2 28c23-20 43-17 56 2s22 11 39-5 33-13 61 0" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+      </aside>
+    </section>
+
+    <section id="dashboard" hidden>
+      <section class="record-note ruled">
+        <p class="section-marker">Record notes</p>
+        <div class="record-content">
+          <div><div id="summary" class="summary-copy"></div><p class="muted">Included: dated, user-authored text. Excluded: assistant text, attachments without text, and undated records. Narrowing the period never changes the source archive.</p></div>
+          <form id="date-filter" class="date-filter">
+            <fieldset><legend>Read a period</legend><div class="date-fields"><label>From<input id="date-from" type="month"></label><label>To<input id="date-to" type="month"></label></div><button type="submit" class="text-action">Apply period</button><button id="date-reset" type="button" class="text-action quiet">Full record</button></fieldset>
+          </form>
+        </div>
+      </section>
+
+      <section class="analysis-section ruled">
+        <div class="margin-note"><p class="section-marker">One pattern</p><p>Select a wording pattern. The graph reports its three-month rolling share of dated messages.</p></div>
+        <div class="analysis-content"><div class="section-heading"><h2 id="timeline-title">Counterfactual wording</h2><label>Showing <select id="move-filter"></select></label></div><div id="timeline" class="timeline" aria-label="Timeline chart"></div><p id="timeline-note" class="caption"></p></div>
+      </section>
+
+      <section class="analysis-section ruled">
+        <div class="margin-note"><p class="section-marker">All matches</p><p>The circle is a visual index, not a progress score. The list gives every exact count.</p></div>
+        <div class="analysis-content distribution-layout"><div id="pie-chart" class="pie-chart" aria-label="Reasoning distribution pie chart"></div><div><p id="label-total" class="caption"></p><div id="distribution"></div></div></div>
+      </section>
+
+      <section class="analysis-section ruled">
+        <div class="margin-note"><p class="section-marker warning">Observed changes</p><p>Change notes compare the first and second halves of the selected period. They disappear when either half has too little dated material.</p></div>
+        <div class="analysis-content"><div id="inferences"></div></div>
+      </section>
+
+      <section class="analysis-section ruled">
+        <div class="margin-note"><p class="section-marker">Method</p><p>These labels are deterministic wording rules, not hidden-intent detection.</p></div>
+        <div class="analysis-content method-copy"><p><strong>What is counted:</strong> explicit language such as “what if,” “compare,” “under this constraint,” or “as a result.” A single turn can hold several labels.</p><p><strong>What is not claimed:</strong> diagnosis, IQ, ability, personality, employability, medical status, or a causal explanation for a pattern.</p><details><summary>Read the reasoning-move glossary</summary><div id="taxonomy-guide" class="taxonomy-guide"></div></details></div>
+      </section>
+
+      <section class="analysis-section evidence-section">
+        <div class="margin-note"><p class="section-marker">Local evidence</p><p>One local source turn at a time, with the rule cues that put it here.</p></div>
+        <div class="analysis-content"><div class="section-heading"><h2>Source evidence</h2><label>Only show <select id="evidence-filter"><option value="all">all moves</option></select></label></div><div id="evidence"></div><div id="evidence-controls" class="evidence-controls" hidden><button id="evidence-prev" class="text-action quiet" type="button">Previous source</button><span id="evidence-position" class="caption" aria-live="polite"></span><button id="evidence-next" class="text-action quiet" type="button">Next source</button></div></div>
+      </section>
+    </section>
+  </main>
+  <footer>Local processing · no raw-text telemetry · no model calls · no training or sale of your data</footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
