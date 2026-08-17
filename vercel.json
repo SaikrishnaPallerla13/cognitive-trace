@@ -1,5 +1,5 @@
 {
-  "outputDirectory": "public",
+  "buildCommand": "npm run build",
   "headers": [
     {
       "source": "/(.*)",
