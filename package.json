@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "test": "node --test tests/core.test.mjs",
-    "start": "node server.mjs",
+    "start": "node scripts/local-server.mjs",
     "build": "node scripts/build.mjs"
   }
 }
